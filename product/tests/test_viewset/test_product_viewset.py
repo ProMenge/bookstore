@@ -53,4 +53,14 @@ class TestProductViewSet(APITestCase):
 
         self.assertEqual(created_product.title, 'notebook')
         self.assertEqual(created_product.price, 800.00)
+        
+    def test_delete_product(self):
+        response = self.client.delete(
+            reverse('product-detail', kwargs={'version': 'v1', 'pk': self.product.id})
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+        with self.assertRaises(Product.DoesNotExist):
+            Product.objects.get(id=self.product.id)
 
