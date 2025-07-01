@@ -17,10 +17,12 @@ services:
     image: postgres:14.0-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5433:5432
     environment:
-      - POSTGRES_USER=dev
-      - POSTGRES_PASSWORD=dev
-      - POSTGRES_DB=bookstore_db
+      - POSTGRES_USER=bookstore_dev
+      - POSTGRES_PASSWORD=bookstore_dev
+      - POSTGRES_DB=bookstore_dev_db
     networks:
       - backend
 networks:
